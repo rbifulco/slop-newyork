@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Slop New York · Spatial Review capture</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: dark; font: 16px/1.6 system-ui, sans-serif; background: #10171b; color: #e7eef0; }
+    body { max-width: 48rem; margin: 10vh auto; padding: 1.5rem; }
+    h1 { font-size: 2rem; line-height: 1.2; }
+    a { color: #8ed6c7; } p { color: #bdccd1; }
+    #capture-status { border-left: 3px solid #8ed6c7; padding: .8rem 1rem; background: #19262b; }
+    small { color: #8b9da6; } code { overflow-wrap: anywhere; }
+    [hidden] { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Slop New York</h1>
+  <p>Spatial Review capture · authored landmarks, geographic context and scenic cameras.</p>
+  <p id="capture-status" role="status">Preparing the review representation…</p>
+  <p>This page stays open while the editor requests geometry and generated textures.
+    It does not run the city simulation.</p>
+  <p>Materials use simplified colours. Procedural facades, surrounding building detail,
+    traffic, lighting and post-processing are outside this review representation.</p>
+  <p><a id="review-link" target="_blank" rel="noopener noreferrer" hidden>Open Spatial Review</a>
+    · <a href="./">Open the game</a></p>
+  <small>Build <code id="capture-build">loading</code></small>
+  <script type="module" src="./spatial-review/capture.js"></script>
+</body>
+</html>

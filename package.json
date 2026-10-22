@@ -1,0 +1,24 @@
+{
+  "name": "slop-newyork",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Slop New York with an isolated Spatial Review capture",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs tests/*.test.mjs",
+    "build": "node tools/build-spatial-review.mjs",
+    "dev": "npm run build && node tools/spatial-review-server.mjs",
+    "preview": "node tools/spatial-review-server.mjs",
+    "test:browser": "npm run build && node tools/smoke-spatial-review.mjs"
+  },
+  "dependencies": {
+    "@alterno-dev/spatial-review": "0.7.0",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "playwright": "1.58.2"
+  },
+  "engines": {
+    "node": ">=22.11"
+  }
+}

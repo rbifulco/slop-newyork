@@ -1,0 +1,16 @@
+{
+  "schema": "spatial-review-discovery/v1",
+  "version": 1,
+  "name": "Slop New York — landmarks and scenic cameras",
+  "websiteUrl": "../",
+  "liveCapture": "../spatial-review.html",
+  "capabilities": {
+    "liveCapture": {
+      "editorOriginPolicy": {
+        "mode": "allowlist",
+        "origins": ["https://spatial-review.alterno.dev"],
+        "allowLoopbackPeers": true
+      }
+    }
+  }
+}
