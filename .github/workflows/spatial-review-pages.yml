@@ -1,0 +1,92 @@
+name: Publish Slop New York Spatial Review
+
+on:
+  push:
+    branches:
+      - feat/spatial-review
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: slop-newyork-github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Test and build static site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install pinned dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build ordinary site and isolated capture
+        run: npm run build
+
+      - name: Check Pages subdirectory paths and static discovery
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { existsSync, readFileSync } from 'node:fs';
+          import { normalizeSpatialReviewDiscovery } from '@alterno-dev/spatial-review';
+          const [owner, name] = process.env.GITHUB_REPOSITORY.split('/');
+          const website = `https://${owner}.github.io/${name}/`;
+          const discoveryUrl = new URL('.well-known/spatial-review.json', website).href;
+          const discovery = JSON.parse(readFileSync('dist/.well-known/spatial-review.json', 'utf8'));
+          const resolved = normalizeSpatialReviewDiscovery(discovery, discoveryUrl);
+          assert.equal(resolved.websiteUrl, website);
+          assert.equal(resolved.liveCapture, new URL('spatial-review.html', website).href);
+          for (const file of ['index.html', 'spatial-review.html', 'spatial-review/capture.js',
+            'spatial-review/build.json', 'js/landmarks.js', 'js/cameras.js', 'css/style.css']) {
+            assert.ok(existsSync(`dist/${file}`), `Missing publishable file ${file}`);
+          }
+          assert.match(readFileSync('dist/spatial-review.html', 'utf8'),
+            /src="\.\/spatial-review\/capture\.js"/);
+          console.log('GitHub Pages paths and discovery validated:', website);
+          NODE
+
+      - name: Install Chromium for transport acceptance
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify browser discovery, scene, texture, refresh and teardown
+        run: npm run test:browser
+
+      - name: Disable Jekyll (preserve .well-known discovery)
+        run: touch dist/.nojekyll
+
+      - name: Upload static Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    name: Publish GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Verify GitHub Pages is enabled for Actions
+        uses: actions/configure-pages@v5
+
+      - name: Deploy static artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

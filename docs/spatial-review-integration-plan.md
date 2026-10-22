@@ -247,3 +247,33 @@ existing user feedback was modified.
 One editor UI issue was observed separately from the website integration: at
 1440 × 1000, the collaborator widget overlapped the note form's Save control.
 Keyboard activation completed the feedback action.
+
+
+## GitHub Pages publishing task (22 October 2026)
+
+The repository's `feat/spatial-review` branch now carries
+`.github/workflows/spatial-review-pages.yml`, a static GitHub Actions
+deployment for `https://rbifulco.github.io/slop-newyork/`.
+On every branch push, the workflow installs the pinned dependencies,
+executes unit and browser transport tests, builds the site, validates
+repository-subpath discovery/capture URLs, and uploads `dist/` with
+`.nojekyll`. The workflow's deploy job uses the `github-pages`
+environment and official Pages deployment action. No automatic merge or
+default-branch change is involved.
+
+GitHub Pages was disabled (`has_pages: false`) when this task started.
+Publishing requires the repository owner to select GitHub Actions as the
+Pages source in Settings → Pages; the connected GitHub tool does not have
+administration access to enable Pages. If fork Actions are disabled, they
+also require enabling. Do not claim a public deployment or production
+editor round trip until the workflow and live URLs are verified.
+
+GitHub Pages does not support configurable CSP or framing response headers.
+It cannot reproduce the local server's capture-only
+`frame-ancestors` restriction. SDK-level origin authorization continues
+to gate postMessage scene/texture requests, but public source geometry and
+asset URLs must be considered public. The deployed discovery file continues
+to authorize the official editor, and relative URLs preserve the
+`/slop-newyork/` repository prefix. After activation, independently
+verify public CORS, framing, discovery, Scene/Asset/Experience,
+texture delivery and feedback refresh from the public website URL.

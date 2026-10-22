@@ -47,7 +47,42 @@ npm run dev -- --port 5183 --base-path /slop-newyork/
 
 Use the corresponding ordinary website URL in the editor. `--editor-origin http://localhost:5184` adds an exact local editor framing origin.
 
-This branch does not deploy the integration to production. The upstream live demo linked above is separate from this development capture. See the [integration plan](docs/spatial-review-integration-plan.md) for authorization, scope, source mappings, verification evidence, and remaining limitations.
+### GitHub Pages
+
+This branch deploys the built static site to GitHub Pages on each push to
+`feat/spatial-review`, once Pages is enabled for GitHub Actions in repository
+**Settings → Pages → Build and deployment → Source: GitHub Actions**.
+The deployment workflow is
+[.github/workflows/spatial-review-pages.yml](.github/workflows/spatial-review-pages.yml).
+The `main` branch remains unchanged.
+
+After the Pages deployment succeeds:
+
+- **Game:** https://rbifulco.github.io/slop-newyork/
+- **Capture:** https://rbifulco.github.io/slop-newyork/spatial-review.html
+- **Review:** [Open the published site in Spatial Review](https://spatial-review.alterno.dev/review?site=https%3A%2F%2Frbifulco.github.io%2Fslop-newyork%2F)
+- **Discovery:** https://rbifulco.github.io/slop-newyork/.well-known/spatial-review.json
+
+The workflow runs the tests and cross-origin browser smoke check, builds
+`dist/`, verifies that the discovery URLs resolve under the repository's
+GitHub Pages subdirectory, and uploads the artifact with a `.nojekyll` marker
+so dot-directories are published. This is an Actions deployment, not a
+branch-source Jekyll deployment. If Pages or fork Actions are disabled,
+enable them in GitHub's repository settings before expecting the deployment
+to succeed.
+
+**Hosting limitation:** GitHub Pages cannot set per-route CSP, frame-ancestor,
+or CORS headers. Unlike the local development server, it cannot restrict
+capture-page framing to the official editor at the HTTP layer. The SDK's
+message authorization remains restricted to the approved official editor and
+same-origin consumer; however, the page, scripts, and public scene content are
+publicly accessible. Never include credentials or private geometry in the
+capture. Confirm the public editor connection and hosting headers after
+deployment.
+
+The upstream live demo linked above is separate from this fork's Pages site.
+See the [integration plan](docs/spatial-review-integration-plan.md) for
+authorization, scope, source mappings, verification evidence, and limitations.
 
 ### Verification
 
