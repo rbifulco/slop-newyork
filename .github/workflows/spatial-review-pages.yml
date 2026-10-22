@@ -67,10 +67,19 @@ jobs:
       - name: Disable Jekyll (preserve .well-known discovery)
         run: touch dist/.nojekyll
 
+      - name: Assert required hidden files are present before publishing
+        run: |
+          test -s dist/.well-known/spatial-review.json
+          test -f dist/.nojekyll
+
       - name: Upload static Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+          # v4 excludes hidden paths by default. Without this, public
+          # /.well-known/spatial-review.json returns 404 despite passing
+          # source/build-level tests.
+          include-hidden-files: true
 
   deploy:
     name: Publish GitHub Pages

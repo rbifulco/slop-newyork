@@ -277,3 +277,20 @@ to authorize the official editor, and relative URLs preserve the
 `/slop-newyork/` repository prefix. After activation, independently
 verify public CORS, framing, discovery, Scene/Asset/Experience,
 texture delivery and feedback refresh from the public website URL.
+
+## GitHub Pages discovery 404 correction
+
+The first successful Pages deployment completed its build, tests and deploy job,
+but `/slop-newyork/.well-known/spatial-review.json` returned 404. This was
+caused by the GitHub Pages upload action version 4 excluding dot-prefixed paths
+by default, including the intended `.well-known/` directory and `.nojekyll`
+file. Local and build-only discovery checks did not exercise that packaging
+behavior.
+
+The Pages workflow now sets `include-hidden-files: true` on
+`actions/upload-pages-artifact@v4` and checks that both files exist
+immediately before packaging. All other review access constraints remain
+unchanged. The top-level
+`https://rbifulco.github.io/.well-known/spatial-review.json` lookup is an
+editor fallback and is not the required route for this repository-path website.
+Verify the deployed nested discovery endpoint after the new workflow completes.
