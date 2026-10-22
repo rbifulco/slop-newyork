@@ -178,7 +178,7 @@ export async function buildLandmarkReview(NYC, { signal } = {}) {
     group.updateMatrixWorld(true);
     maxChunkMs = Math.max(maxChunkMs, performance.now() - conversionStart);
     return {
-      subjects, group, dispose,
+      subjects, group, dispose, colliders: step.value.colliders,
       diagnostics: {
         constructionMs: performance.now() - started,
         maxChunkMs,

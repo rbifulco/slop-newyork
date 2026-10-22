@@ -6,10 +6,10 @@ import {
   createSpatialReviewEditorAuthorization,
   spatialReviewEditorUrl,
 } from '@alterno-dev/spatial-review';
-import { buildLandmarkReview } from './landmarks.mjs';
-import { buildGeographicContext } from './context.mjs';
+import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
+import { buildWorldReview, configureWorldSource, WORLD_SOURCE_SCRIPTS } from './world.mjs';
 import { buildNavigationReview } from './navigation.mjs';
-import { registerReviewSubject, yieldForCapture } from './registration.mjs';
+import { registerReviewSubject } from './registration.mjs';
 
 const BUILD_ID = __SPATIAL_REVIEW_BUILD_ID__;
 const isLoopback = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
@@ -19,7 +19,7 @@ const authorization = createSpatialReviewEditorAuthorization({
   allowLoopbackPeers: isLoopback,
   advertiseEditorOriginPolicy: { publicOrigins: ['https://spatial-review.alterno.dev'] },
 });
-const scripts = ['nyc-geodata', 'city-config', 'tsl-materials', 'landmarks', 'cameras'];
+const scripts = WORLD_SOURCE_SCRIPTS;
 const status = document.getElementById('capture-status');
 document.getElementById('capture-build').textContent = BUILD_ID;
 const link = document.getElementById('review-link');
@@ -72,30 +72,33 @@ async function startCapture() {
     return representation;
   };
   try {
-    window.NYC = { THREE, TSL };
-    for (const name of scripts) await loadScript(name, controller.signal);
+    const adapterState = { owned: [], crowds: [] };
+    window.NYC = { THREE, TSL, Addons: { mergeGeometries, mergeVertices } };
+    for (const name of scripts) {
+      await loadScript(name, controller.signal);
+      configureWorldSource(name, window.NYC, adapterState);
+    }
     await document.fonts.ready;
     controller.signal.throwIfAborted();
-    let mark = performance.now();
-    const landmarks = adopt(await buildLandmarkReview(window.NYC, { signal: controller.signal }));
-    diagnostics.phases.landmarksMs = performance.now() - mark;
-    await yieldForCapture(controller.signal);
-    mark = performance.now();
-    const context = adopt(await buildGeographicContext(window.NYC, { signal: controller.signal }));
-    diagnostics.phases.contextMs = performance.now() - mark;
-    await yieldForCapture(controller.signal);
+    const mark = performance.now();
+    const world = adopt(await buildWorldReview(window.NYC, {
+      signal: controller.signal, state: adapterState,
+      onProgress: name => { status.textContent = `Preparing ${name.toLowerCase()}…`; },
+    }));
+    diagnostics.phases.worldMs = performance.now() - mark;
+    diagnostics.world = world.diagnostics;
+    diagnostics.materials = world.diagnostics.landmarks;
     const navigation = buildNavigationReview(window.NYC);
     diagnostics.navigation = navigation.metadata;
-    diagnostics.materials = landmarks.diagnostics;
-    diagnostics.context = context.diagnostics;
+    for (const assembly of world.assemblies) registry.registerAssembly(assembly);
     registry.registerAssembly({
       assemblyId: 'manhattan-landmarks', name: 'Manhattan landmarks',
       sourceRef: 'js/landmarks.js#buildLandmarks',
       localTransform: { position: [0, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
     });
-    for (const representation of [landmarks, context]) {
+    for (const representation of [world]) {
       for (const subject of representation.subjects) {
-        const { metadata } = registerReviewSubject(registry, subject, BUILD_ID, representation === landmarks ? 'manhattan-landmarks' : undefined);
+        const { metadata } = registerReviewSubject(registry, subject, BUILD_ID, subject.parentAssemblyId ?? 'manhattan-landmarks');
         diagnostics.subjects.push({ actorId: subject.actorId, assetId: subject.assetId,
           sourceRef: subject.sourceRef, placementSourceRef: subject.placementSourceRef,
           componentSources: subject.componentSources, ...metadata });
@@ -111,7 +114,7 @@ async function startCapture() {
       maxResourceBytes: 4 * 1024 * 1024,
       maxConcurrentAssetRequests: 2,
       maxInFlightBytes: 32 * 1024 * 1024,
-      maxQueuedAssetRequests: 24,
+      maxQueuedAssetRequests: 64,
     });
     diagnostics.ready = true;
     status.textContent = `Ready · ${registry.size} review subjects · ${registry.navigationSize} scenic camera sequences`;

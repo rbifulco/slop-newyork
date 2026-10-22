@@ -1,7 +1,7 @@
 {
   "schema": "spatial-review-discovery/v1",
   "version": 1,
-  "name": "Slop New York — landmarks and scenic cameras",
+  "name": "Slop New York — full city and scenic cameras",
   "websiteUrl": "../",
   "liveCapture": "../spatial-review.html",
   "capabilities": {

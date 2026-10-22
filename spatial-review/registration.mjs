@@ -15,9 +15,10 @@ export function describeSubject(subject) {
   const rotation = new THREE.Euler().setFromQuaternion(quaternion, 'XYZ');
   const geometries = new Set();
   const attributes = new Set();
-  let triangles = 0, nodes = 0, geometryBytes = 0;
+  let triangles = 0, nodes = 0, geometryBytes = 0, instanceBytes = 0;
   root.traverse((object) => {
     nodes++;
+    if (object.isInstancedMesh) instanceBytes += object.count * 256;
     const geometry = object.geometry;
     if (!geometry?.attributes?.position) return;
     triangles += Math.floor((geometry.index?.count ?? geometry.attributes.position.count) / 3) * (object.isInstancedMesh ? object.count : 1);
@@ -34,11 +35,11 @@ export function describeSubject(subject) {
   });
   // Includes typed geometry, component/material metadata and structured clone
   // overhead. The SDK checks the actual transfer size against the request cap.
-  const estimatedBytes = Math.ceil(geometryBytes * 1.1 + nodes * 2048 + 16384);
+  const estimatedBytes = Math.ceil(geometryBytes * 1.1 + instanceBytes + nodes * 4096 + 32768);
   return {
     transform: { position: position.toArray(), rotation: [rotation.x, rotation.y, rotation.z].map(THREE.MathUtils.radToDeg), scale: scale.toArray() },
     bounds: { center: box.getCenter(new THREE.Vector3()).toArray(), size: box.getSize(new THREE.Vector3()).toArray() },
-    estimatedBytes, geometryBytes, triangles, nodes, attributes: [...attributes],
+    estimatedBytes, geometryBytes, instanceBytes, triangles, nodes, attributes: [...attributes],
   };
 }
 
@@ -51,6 +52,7 @@ export async function yieldForCapture(signal) {
 
 export function registerReviewSubject(registry, subject, buildId, parentAssemblyId) {
   const metadata = describeSubject(subject);
+  const overview = subject.overviewRoot ? describeSubject({ ...subject, root: subject.overviewRoot }) : metadata;
   const revision = `${buildId}:${subject.assetId}`;
   const registration = {
     actorId: subject.actorId, assetId: subject.assetId, name: subject.name,
@@ -62,19 +64,21 @@ export function registerReviewSubject(registry, subject, buildId, parentAssembly
       revision,
       representations: ['overview', 'detail'].map((purpose) => ({
         id: purpose, purpose, revision: `${revision}:${purpose}`,
-        estimatedBytes: metadata.estimatedBytes, triangles: metadata.triangles,
-        attributes: metadata.attributes, geometricError: 0,
+        estimatedBytes: (purpose === 'overview' ? overview : metadata).estimatedBytes,
+        triangles: (purpose === 'overview' ? overview : metadata).triangles,
+        attributes: (purpose === 'overview' ? overview : metadata).attributes,
+        geometricError: purpose === 'overview' && overview.triangles !== metadata.triangles ? Math.hypot(...metadata.bounds.size) : 0,
       })),
     },
-    async produceRepresentation({ signal, maxBytes, reportProgress }) {
+    async produceRepresentation({ signal, maxBytes, reportProgress, representation }) {
       signal.throwIfAborted();
-      if (metadata.estimatedBytes > maxBytes) throw new RangeError(`${subject.name} exceeds the negotiated geometry limit.`);
+      if ((representation.id === 'overview' ? overview : metadata).estimatedBytes > maxBytes) throw new RangeError(`${subject.name} exceeds the negotiated geometry limit.`);
       // Roots are deterministic capture-owned source geometry. Heavy copying and
       // serialization happens only after demand, inside the SDK's bounded queue.
       await yieldForCapture(signal);
       reportProgress({ phase: 'serializing' });
       signal.throwIfAborted();
-      return subject.root;
+      return representation.id === 'overview' ? (subject.overviewRoot ?? subject.root) : subject.root;
     },
   };
   registry.registerDeferred(registration);
