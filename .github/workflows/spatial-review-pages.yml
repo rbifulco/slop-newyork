@@ -17,6 +17,10 @@ jobs:
   build:
     name: Test and build static site
     runs-on: ubuntu-latest
+    outputs:
+      build_id: ${{ steps.release.outputs.build_id }}
+      bundle_sha: ${{ steps.release.outputs.bundle_sha }}
+      index_sha: ${{ steps.release.outputs.index_sha }}
     steps:
       - name: Check out review branch
         uses: actions/checkout@v4
@@ -35,6 +39,19 @@ jobs:
 
       - name: Build ordinary site and isolated capture
         run: npm run build
+
+      - name: Record exact release identity
+        id: release
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const sha = file => createHash('sha256').update(readFileSync(file)).digest('hex');
+          appendFileSync(process.env.GITHUB_OUTPUT,
+            `build_id=${JSON.parse(readFileSync('dist/spatial-review/build.json')).buildId}\n` +
+            `bundle_sha=${sha('dist/spatial-review/capture.js')}\n` +
+            `index_sha=${sha('dist/index.html')}\n`);
+          NODE
 
       - name: Check Pages subdirectory paths and static discovery
         run: |
@@ -102,3 +119,59 @@ jobs:
       - name: Deploy static artifact
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify live discovery, framing and exact release files
+        timeout-minutes: 5
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_BUILD: ${{ needs.build.outputs.build_id }}
+          EXPECTED_BUNDLE_SHA: ${{ needs.build.outputs.bundle_sha }}
+          EXPECTED_INDEX_SHA: ${{ needs.build.outputs.index_sha }}
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          const base = new URL(process.env.SITE_URL);
+          if (!base.pathname.endsWith('/')) base.pathname += '/';
+          const editor = 'https://spatial-review.alterno.dev';
+          const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+          let failure;
+          for (let attempt = 0; attempt < 18; attempt++) {
+            const get = async path => {
+              const url = new URL(path, base);
+              url.searchParams.set('verify', `${process.env.GITHUB_SHA}-${attempt}`);
+              const response = await fetch(url, { headers: { Origin: editor }, signal: AbortSignal.timeout(15000) });
+              assert.equal(response.status, 200, `${path}: HTTP ${response.status}`);
+              return response;
+            };
+            try {
+              const manifest = await (await get('spatial-review/build.json')).json();
+              assert.equal(manifest.buildId, process.env.EXPECTED_BUILD, 'Pages is serving a different build');
+              const discoveryResponse = await get('.well-known/spatial-review.json');
+              assert.match(discoveryResponse.headers.get('content-type') ?? '', /application\/json/);
+              assert.ok(['*', editor].includes(discoveryResponse.headers.get('access-control-allow-origin')), 'Discovery must be readable by the approved editor');
+              const discovery = await discoveryResponse.json();
+              assert.equal(discovery.schema, 'spatial-review-discovery/v1');
+              const discoveryUrl = new URL('.well-known/spatial-review.json', base);
+              assert.equal(new URL(discovery.websiteUrl, discoveryUrl).href, base.href);
+              assert.equal(new URL(discovery.liveCapture, discoveryUrl).href, new URL('spatial-review.html', base).href);
+              const capture = await get('spatial-review.html');
+              assert.equal(capture.headers.get('x-frame-options'), null, 'Capture framing is blocked');
+              assert.match(await capture.text(), /complete city geometry/);
+              const bundle = Buffer.from(await (await get('spatial-review/capture.js')).arrayBuffer());
+              const index = Buffer.from(await (await get('index.html')).arrayBuffer());
+              assert.equal(sha(bundle), process.env.EXPECTED_BUNDLE_SHA, 'Published capture bundle differs from the tested bundle');
+              assert.equal(sha(index), process.env.EXPECTED_INDEX_SHA, 'Published ordinary page differs from the tested page');
+              console.log(JSON.stringify({ result: 'PASS', website: base.href, buildId: manifest.buildId,
+                discovery: discoveryUrl.href, capture: new URL('spatial-review.html', base).href,
+                exactBundle: true, exactOrdinaryPage: true, discoveryCORS: true }, null, 2));
+              failure = undefined;
+              break;
+            } catch (error) {
+              failure = error;
+              console.warn(`Public deployment check ${attempt + 1}/18: ${error.message}`);
+              if (attempt < 17) await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+          }
+          if (failure) throw failure;
+          NODE
