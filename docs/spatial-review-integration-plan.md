@@ -294,3 +294,29 @@ unchanged. The top-level
 `https://rbifulco.github.io/.well-known/spatial-review.json` lookup is an
 editor fallback and is not the required route for this repository-path website.
 Verify the deployed nested discovery endpoint after the new workflow completes.
+
+## Related-site comparison and corrected artifact upload
+
+The initial attempted fix in commit `c474843` specified
+`include-hidden-files: true` on `actions/upload-pages-artifact@v4`.
+The action rejected it with `Unexpected input(s) 'include-hidden-files'`
+and still archived files using `--exclude=.[^/]*`. This was confirmed
+directly from that deployment's job logs. The successful workflow result
+therefore did not establish that the hidden discovery file was published.
+
+The owner's `rbifulco/Claude-of-Duty` site uses
+`actions/upload-pages-artifact@v5` with `include-hidden-files: true` to
+publish its GitHub Pages site. The owner's `sole863251/teaserpage` site uses
+Cloudflare Workers static assets, which copies `public/.well-known/` into
+`dist/`, and applies CORS/embedding response headers through
+`public/_headers`. The owner's `rbifulco/bifulco-website` publishes its
+`dist/` via Netlify.
+
+This workflow now adopts the already-used Pages v5 action at the exact
+versioned commit used by Claude-of-Duty. Its `action.yml` explicitly
+supports hidden files and removes the default dot-path exclusion when the
+flag is enabled. A post-upload check inspects the actual `artifact.tar`
+to ensure both `./.well-known/spatial-review.json` and `./.nojekyll`
+were packaged, rather than relying solely on a build directory check.
+Verify the live endpoint and any cross-origin browser/editor behavior
+after the corresponding Pages deployment.

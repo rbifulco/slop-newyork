@@ -66,7 +66,7 @@ After the Pages deployment succeeds:
 The workflow runs the tests and cross-origin browser smoke check, builds
 `dist/`, verifies that the discovery URLs resolve under the repository's
 GitHub Pages subdirectory, and uploads the artifact with `.nojekyll` and `.well-known/` explicitly
-included (`include-hidden-files: true` is required by upload-pages-artifact v4). This is an Actions deployment, not a
+included (using upload-pages-artifact v5, which supports `include-hidden-files: true`). The workflow checks the resulting tar archive actually contains both hidden paths. This is an Actions deployment, not a
 branch-source Jekyll deployment. If Pages or fork Actions are disabled,
 enable them in GitHub's repository settings before expecting the deployment
 to succeed.
