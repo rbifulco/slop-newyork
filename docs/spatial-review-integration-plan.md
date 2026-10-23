@@ -6,7 +6,7 @@ On 22 October 2026 the repository owner requested installation, explicitly appro
 
 The official editor may embed the dedicated capture and receive explicitly registered scene, asset, material, texture, navigation and source-reference data. Authorization remains in `spatial-review/capture.mjs`: `allowOfficialEditor: true`, no additional production origins, loopback peers enabled only on a loopback producer. Same-origin requests remain implicitly allowed. Ordinary DOM, cookies and storage are not registered. Texture URLs containing credentials or query strings are rejected by the world material adapter.
 
-SDK 0.7.0 and Three.js 0.186.1 are retained without a dependency change. The new expansion edits only the capture adapters, capture HTML/discovery, tests and documentation. Ordinary `index.html`, all `js/` sources and the game's render loop remain unchanged from `bcf4bc4`.
+The capture uses SDK 0.8.0 and Three.js 0.186.1. The 0.8.0 protocol upgrade updates the SDK and lockfile while preserving the existing capture adapters, capture HTML/discovery, and tests. Ordinary `index.html`, all `js/` sources and the game's render loop remain unchanged from `bcf4bc4`.
 
 ## Review representation and authoritative sources
 
@@ -62,7 +62,7 @@ Per-response geometry limit: 16 MiB. Texture limit: 4 MiB. Two concurrent asset 
 
 Construction is not lazy and is not yet uniformly divided into sub-50 ms work. Source geography, building and tree constructors can block the capture document for hundreds of milliseconds or longer. Capture yields between systems and during block-detail, partition and pedestrian work. It does not add any of that work to the ordinary page. This is a substantial desktop-oriented scene, not a mobile performance qualification. Loading all detail has a large memory and transfer cost.
 
-Cancellation, failure, page hide and refresh detach the bridge before unregistering. Capture-owned instances, geometry, materials and textures are disposed; the live game owns none of them. Back/forward-cache restoration starts a new complete registry. Bootstrap progress is shown in the capture HTML; SDK 0.7.0 does not provide a producer-controlled initial readiness gate.
+Cancellation, failure, page hide and refresh detach the bridge before unregistering. Capture-owned instances, geometry, materials and textures are disposed; the live game owns none of them. Back/forward-cache restoration starts a new complete registry. Bootstrap progress is shown in the capture HTML; SDK 0.8.0 does not provide a producer-controlled initial readiness gate.
 
 ## Transport and deployment
 

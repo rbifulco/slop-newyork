@@ -14,7 +14,7 @@ Fork it, remix it, improve it, break it. Make games, animations, films, experime
 
 The separate capture document now calls the actual city builders, rather than exporting only landmarks and flat map proxies. It includes Manhattan buildings and architectural details, surrounding boroughs, bridges and islands, roads and markings, parks, trees, street furniture, frozen traffic, posed pedestrians, and player vehicles. The eleven landmark identities and eight scenic camera sequences are retained.
 
-The ordinary game does not load the review SDK. This expansion changes no files under `js/`, no ordinary-page HTML, and no dependency versions. Capture still uses Spatial Review **0.7.0** and Three.js **0.186.1**.
+The ordinary game does not load the review SDK. Capture uses Spatial Review **0.8.0** and Three.js **0.186.1**. The protocol upgrade preserves the existing capture adapters, ordinary-page HTML, and game sources under `js/`.
 
 ### What is selectable
 
