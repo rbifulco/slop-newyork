@@ -13,7 +13,11 @@ function hashValues(values) {
   return (h >>> 0).toString(36);
 }
 
-function geometryBytes(g) {
+// Keep the established region packet boundaries: adding color transport must
+// not retarget existing actor/component feedback. This is an identity partition
+// weight, not a transfer estimate. describeSubject() counts all exported color
+// bytes and the SDK enforces the unchanged 16 MiB actual response ceiling.
+function partitionWeight(g) {
   return ['position', 'normal', 'uv'].reduce((n, k) => n + (g.getAttribute(k)?.count ?? 0) * (g.getAttribute(k)?.itemSize ?? 0) * 4, 0) + (g.index?.count ?? 0) * 4;
 }
 
@@ -24,7 +28,7 @@ export function splitReviewGeometry(source, maxVertices = MAX_GEOMETRY_VERTICES)
   const limit = Math.max(3, Math.floor(maxVertices / 3) * 3), result = [];
   for (let start = 0; start < count; start += limit) {
     const end = Math.min(count, start + limit), geometry = new THREE.BufferGeometry();
-    for (const key of ['position', 'normal', 'uv']) {
+    for (const key of ['position', 'normal', 'uv', 'color']) {
       const input = source.getAttribute(key);
       if (!input) continue;
       const values = new Float32Array((end - start) * input.itemSize);
@@ -72,14 +76,16 @@ export function createWorldMaterialAdapter(owned, diagnostics) {
     const material = basic ? new THREE.MeshBasicMaterial() : new THREE.MeshStandardMaterial();
     material.color.copy(source.color ?? new THREE.Color(0x8e9598));
     if (source.userData.reviewColor !== undefined) material.color.setHex(source.userData.reviewColor);
-    else if (source.isNodeMaterial && source.colorNode && material.color.getHex() === 0xffffff) material.color.setHex(0x929b9f);
+    else if (source.isNodeMaterial && source.colorNode && !source.vertexColors && material.color.getHex() === 0xffffff) material.color.setHex(0x929b9f);
     if (tint) material.color.setRGB(...tintKey.split('-').map(v => Number(v) / 15));
     if (!basic) {
       material.roughness = source.roughness ?? 0.7; material.metalness = source.metalness ?? 0;
       if (source.emissive) material.emissive.copy(source.emissive);
       material.emissiveIntensity = source.emissiveIntensity ?? 1;
     }
-    for (const key of ['opacity', 'transparent', 'alphaTest', 'side', 'depthWrite', 'depthTest', 'polygonOffset', 'polygonOffsetFactor', 'polygonOffsetUnits']) {
+    // Road-marking RGB is visible color; paint/side are custom shader inputs.
+    // Preserve the source opt-in without interpreting every attribute as color.
+    for (const key of ['vertexColors', 'opacity', 'transparent', 'alphaTest', 'side', 'depthWrite', 'depthTest', 'polygonOffset', 'polygonOffsetFactor', 'polygonOffsetUnits']) {
       if (source[key] !== undefined) material[key] = source[key];
     }
     for (const slot of MAP_SLOTS) {
@@ -92,7 +98,11 @@ export function createWorldMaterialAdapter(owned, diagnostics) {
       material[slot] = texture;
     }
     const ref = source.userData.reviewSource ?? sourceRef;
-    material.name = `${source.name || ref.split('#')[1] || source.type}-${material.color.getHexString()}${source.isNodeMaterial ? '-approximation' : ''}`;
+    // Keep the pre-upgrade material ID even when visible road RGB now replaces
+    // its former neutral approximation. Names are feedback identity inputs.
+    const identityColor = !tint && source.vertexColors && source.isNodeMaterial && source.colorNode &&
+      source.userData.reviewColor === undefined && source.color?.getHex() === 0xffffff ? '929b9f' : material.color.getHexString();
+    material.name = `${source.name || ref.split('#')[1] || source.type}-${identityColor}${source.isNodeMaterial ? '-approximation' : ''}`;
     sources[material.name] = { sourceRef: ref, customShaderApproximation: Boolean(source.isNodeMaterial), quantizedInstanceTint: Boolean(tint), maps: MAP_SLOTS.filter(k => material[k]) };
     variants.set(tintKey, material); owned.push(material);
     return material;
@@ -267,7 +277,7 @@ export async function partitionWorldSystems(systems, owned, diagnostics, { signa
       }
       beginPacket();
       for (const mesh of meshes) {
-        const bytes = (geometries.has(mesh.geometry) ? 0 : geometryBytes(mesh.geometry)) + (mesh.isInstancedMesh ? mesh.count * 256 : 0) + 4096;
+        const bytes = (geometries.has(mesh.geometry) ? 0 : partitionWeight(mesh.geometry)) + (mesh.isInstancedMesh ? mesh.count * 256 : 0) + 4096;
         if (root.children.length && (size + bytes > MAX_ASSET_ESTIMATE || root.children.length >= 160)) beginPacket();
         root.add(mesh);
         const overview = mesh.userData.reviewOverview ?? mesh.clone(false);

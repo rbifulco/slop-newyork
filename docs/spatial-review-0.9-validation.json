@@ -1,0 +1,135 @@
+{
+  "sdk": "0.9.0",
+  "protocol": "0.9.0",
+  "three": "0.186.1",
+  "branch": "feat/spatial-review",
+  "buildId": "slop-newyork-415aa8b36e7a9843e7c4",
+  "actors": 761,
+  "assets": 761,
+  "assemblies": 10,
+  "navigation": {
+    "sequences": 8,
+    "stops": 16,
+    "segments": 8,
+    "cameraAimSamples": 549
+  },
+  "identicalActorsToBaseline": true,
+  "appearance": {
+    "assetId": "landmark-design-gct",
+    "detailGeometryBytes": 70808,
+    "sceneGeometryBytes": 46856,
+    "materialIdsStableAcrossProfiles": true
+  },
+  "texture": {
+    "mime": "image/png",
+    "bytes": 3657,
+    "width": 512,
+    "height": 128,
+    "decodedRGBABytes": 262144,
+    "estimatedGPUMipBytes": 349526,
+    "sharedAcrossProfiles": true
+  },
+  "coverage": [
+    {
+      "system": "geography",
+      "actorId": "world-geography--1--1-0",
+      "assetId": "world-geography--1--1-0-design",
+      "nodes": 14,
+      "geometries": 11,
+      "detailGeometryBytes": 1716140,
+      "sceneGeometryBytes": 1073240,
+      "colorBytes": 0
+    },
+    {
+      "system": "boroughs",
+      "actorId": "world-boroughs--1--1-0",
+      "assetId": "world-boroughs--1--1-0-design",
+      "nodes": 3,
+      "geometries": 1,
+      "detailGeometryBytes": 14688,
+      "sceneGeometryBytes": 7344,
+      "colorBytes": 0
+    },
+    {
+      "system": "buildings",
+      "actorId": "world-buildings--1--1-0",
+      "assetId": "world-buildings--1--1-0-design",
+      "nodes": 32,
+      "geometries": 16,
+      "detailGeometryBytes": 38472,
+      "sceneGeometryBytes": 25332,
+      "colorBytes": 0
+    },
+    {
+      "system": "streets",
+      "actorId": "world-streets--1--1-0",
+      "assetId": "world-streets--1--1-0-design",
+      "nodes": 63,
+      "geometries": 23,
+      "detailGeometryBytes": 709900,
+      "sceneGeometryBytes": 51480,
+      "colorBytes": 0
+    },
+    {
+      "system": "traffic",
+      "actorId": "world-traffic--1--1-0",
+      "assetId": "world-traffic--1--1-0-design",
+      "nodes": 13,
+      "geometries": 8,
+      "detailGeometryBytes": 202744,
+      "sceneGeometryBytes": 140476,
+      "colorBytes": 0
+    },
+    {
+      "system": "highways",
+      "actorId": "world-highways--1-3-0",
+      "assetId": "world-highways--1-3-0-design",
+      "nodes": 16,
+      "geometries": 3,
+      "detailGeometryBytes": 363264,
+      "sceneGeometryBytes": 255228,
+      "colorBytes": 0
+    },
+    {
+      "system": "markings",
+      "actorId": "world-markings-0--1-0",
+      "assetId": "world-markings-0--1-0-design",
+      "nodes": 5,
+      "geometries": 3,
+      "detailGeometryBytes": 4394088,
+      "sceneGeometryBytes": 2929392,
+      "colorBytes": 1464696
+    },
+    {
+      "system": "players",
+      "actorId": "world-players--1-0-0",
+      "assetId": "world-players--1-0-0-design",
+      "nodes": 9,
+      "geometries": 7,
+      "detailGeometryBytes": 82960,
+      "sceneGeometryBytes": 56836,
+      "colorBytes": 0
+    },
+    {
+      "system": "people",
+      "actorId": "world-people--1--1-0",
+      "assetId": "world-people--1--1-0-design",
+      "nodes": 30,
+      "geometries": 28,
+      "detailGeometryBytes": 639408,
+      "sceneGeometryBytes": 399840,
+      "colorBytes": 0
+    }
+  ],
+  "checks": {
+    "testsBefore": 124,
+    "testsAfter": 124,
+    "focusedAfterFinalIdentityChange": 8,
+    "build": "pass",
+    "crossOriginBrowser": "pass",
+    "stableRefresh": "pass",
+    "teardown": "pass",
+    "officialEditor": "not established by producer smoke"
+  },
+  "errors": []
+}

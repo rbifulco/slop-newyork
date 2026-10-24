@@ -191,7 +191,8 @@ export function bakePerson({ geometry, pose, seed, x = 0, z = 0 }) {
   const result = new THREE.BufferGeometry();
   result.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   result.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
-  // Preserve actual body-part boundaries; the SDK does not serialize vertex colors.
+  // Preserve actual body-part boundaries. Source skin/extra attributes encode
+  // skeletal and shader inputs, so keep the declared body-part palette approximation.
   const buckets = Array.from({ length: 8 }, () => []);
   const count = geometry.index?.count ?? position.count;
   for (let i = 0; i < count; i += 3) {

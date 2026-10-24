@@ -89,7 +89,7 @@ export async function buildLandmarkReview(NYC, { signal } = {}) {
       if (source.emissive) material.emissive.copy(source.emissive);
       material.emissiveIntensity = source.emissiveIntensity ?? 1;
     }
-    for (const property of ['opacity', 'transparent', 'alphaTest', 'side', 'depthWrite',
+    for (const property of ['vertexColors', 'opacity', 'transparent', 'alphaTest', 'side', 'depthWrite',
       'depthTest', 'polygonOffset', 'polygonOffsetFactor', 'polygonOffsetUnits']) {
       if (source[property] !== undefined) material[property] = source[property];
     }

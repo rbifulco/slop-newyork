@@ -24,7 +24,7 @@ export function describeSubject(subject) {
     triangles += Math.floor((geometry.index?.count ?? geometry.attributes.position.count) / 3) * (object.isInstancedMesh ? object.count : 1);
     if (geometries.has(geometry)) return;
     geometries.add(geometry);
-    for (const key of ['position', 'normal', 'uv']) {
+    for (const key of ['position', 'normal', 'uv', 'color']) {
       const attribute = geometry.getAttribute(key);
       if (attribute) {
         attributes.add(key);

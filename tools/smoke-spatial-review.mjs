@@ -72,12 +72,20 @@ try {
     };
     const esb = await requestAsset('landmark-design-esb');
     const gct = await requestAsset('landmark-design-gct');
+    const gctScene = await requestAsset('landmark-design-gct', 'overview', 'scene');
     const textureMap = gct.asset.materials.flatMap(material => material.maps ?? []).find(map => map.slot === 'map');
     if (!textureMap?.resourceId) throw new Error('MetLife sign has no live texture resource');
+    const sceneMap = gctScene.asset.materials.flatMap(material => material.maps ?? []).find(map => map.slot === 'map');
+    if (sceneMap?.resourceId !== textureMap.resourceId) throw new Error('Scene and Asset must retain the shared MetLife sign texture');
+    if (!gctScene.asset.geometries.some(entry => entry.geometry.uvs?.length)) throw new Error('Scene lost the texture UVs');
+    const geometryBytes = asset => asset.geometries.reduce((total, entry) => total +
+      ['positions', 'normals', 'uvs', 'colors', 'indices'].reduce((sum, key) => sum + (entry.geometry[key]?.byteLength ?? 0), 0), 0);
     const texture = await rpc({ type: 'alterno:spatial-review:resource-request', resourceId: textureMap.resourceId }, 'alterno:spatial-review:resource-response');
     if (!texture.ok) throw new Error(`Texture failed: ${texture.error}`);
     const image = await createImageBitmap(new Blob([texture.bytes], { type: texture.contentType }));
-    const decodedTexture = { mime: texture.contentType, bytes: texture.bytes.byteLength, width: image.width, height: image.height }; image.close();
+    const decodedTexture = { mime: texture.contentType, bytes: texture.bytes.byteLength, width: image.width, height: image.height,
+      decodedRGBABytes: image.width * image.height * 4, estimatedGPUMipBytes: Math.ceil(image.width * image.height * 4 * 4 / 3),
+      sharedAcrossProfiles: true }; image.close();
     const coverage = [];
     const systems = ['geography', 'boroughs', 'buildings', 'streets', 'traffic', 'highways', 'markings', 'players', 'people'];
     for (const system of systems) {
@@ -87,13 +95,19 @@ try {
       const overview = await requestAsset(actor.assetId, 'overview', 'scene');
       if (!result.asset.geometries?.length || !overview.asset.geometries?.length) throw new Error(`Empty ${system} geometry`);
       if (!result.asset.sourceRef?.startsWith('js/')) throw new Error(`Missing ${system} source mapping`);
-      coverage.push({ system, actorId: actor.actorId, assetId: result.asset.id, nodes: result.asset.nodes.length, geometries: result.asset.geometries.length });
+      if (system === 'markings' && (!overview.asset.geometries.some(entry => entry.geometry.colors?.length) ||
+          !overview.asset.materials.some(material => material.vertexColors))) throw new Error('Visible road-marking colors are missing');
+      coverage.push({ system, actorId: actor.actorId, assetId: result.asset.id, nodes: result.asset.nodes.length, geometries: result.asset.geometries.length,
+        detailGeometryBytes: geometryBytes(result.asset), sceneGeometryBytes: geometryBytes(overview.asset),
+        colorBytes: overview.asset.geometries.reduce((sum, entry) => sum + (entry.geometry.colors?.byteLength ?? 0), 0) });
     }
     const refreshedReady = rpc(null, 'alterno:spatial-review:ready');
     frame.src = captureUrl.href; await refreshedReady;
     const refreshed = await rpc(catalogRequest, 'alterno:spatial-review:catalog');
     return { websiteUrl, discoveryUrl, captureUrl: captureUrl.href, catalog: catalog.payload, refreshed: refreshed.payload,
-      coverage, esb: { id: esb.asset.id, sourceRef: esb.asset.sourceRef, nodes: esb.asset.nodes.map(({ id, name, sourceRef }) => ({ id, name, sourceRef })) }, texture: decodedTexture };
+      coverage, esb: { id: esb.asset.id, sourceRef: esb.asset.sourceRef, nodes: esb.asset.nodes.map(({ id, name, sourceRef }) => ({ id, name, sourceRef })) },
+      appearance: { assetId: gct.asset.id, detailGeometryBytes: geometryBytes(gct.asset), sceneGeometryBytes: geometryBytes(gctScene.asset),
+        materialIdsStableAcrossProfiles: JSON.stringify(gct.asset.materials.map(m => m.id)) === JSON.stringify(gctScene.asset.materials.map(m => m.id)) }, texture: decodedTexture };
   }, websiteUrl);
   assert.equal(first.catalog.buildId, first.refreshed.buildId);
   assert.deepEqual(first.catalog.scene.actors, first.refreshed.scene.actors, 'complete inventory, IDs, transforms and bounds survive reload');

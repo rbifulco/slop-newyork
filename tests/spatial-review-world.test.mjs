@@ -18,25 +18,26 @@ test('seeded construction repeats exactly and restores Math.random after failure
   assert.equal(Math.random, original);
 });
 
-test('large geometry splitting preserves triangles, normals, UVs and material groups', () => {
+test('large geometry splitting preserves triangles, normals, UVs, normalized RGBA colors and material groups', () => {
   const geometry = new THREE.BoxGeometry(2, 3, 4);
+  geometry.setAttribute('color', new THREE.Uint8BufferAttribute(Array.from({ length: geometry.attributes.position.count * 4 }, (_, i) => (i * 17) % 256), 4, true));
   const parts = splitReviewGeometry(geometry, 9);
   assert.equal(parts.length, 4);
   const expected = [], actual = [];
   for (let i = 0; i < geometry.index.count; i++) {
     const v = geometry.index.getX(i);
-    for (const k of ['position', 'normal', 'uv']) {
+    for (const k of ['position', 'normal', 'uv', 'color']) {
       const a = geometry.getAttribute(k);
       for (let j = 0; j < a.itemSize; j++) expected.push(a.getComponent(v, j));
     }
   }
   for (const part of parts) for (let i = 0; i < part.attributes.position.count; i++) {
-    for (const k of ['position', 'normal', 'uv']) {
+    for (const k of ['position', 'normal', 'uv', 'color']) {
       const a = part.getAttribute(k);
       for (let j = 0; j < a.itemSize; j++) actual.push(a.getComponent(i, j));
     }
   }
-  assert.deepEqual(actual, expected);
+  near(actual, expected);
   const counts = parts.flatMap(g => g.groups).reduce((map, g) => map.set(g.materialIndex, (map.get(g.materialIndex) ?? 0) + g.count), new Map());
   for (const g of geometry.groups) assert.equal(counts.get(g.materialIndex), g.count);
   dispose([geometry, ...parts]);
@@ -92,9 +93,12 @@ test('source shader approximations preserve supported material fields and reject
   assert.equal(converted.color.getHex(), 0x123456);
   assert.equal(converted.roughness, .8); assert.equal(converted.metalness, .2); assert.equal(converted.opacity, .6);
   assert.equal(converted.isNodeMaterial, undefined);
+  assert.equal(converted.vertexColors, false, 'custom shader attributes do not enable color shading');
+  const painted = new THREE.MeshStandardNodeMaterial({ vertexColors: true });
+  assert.equal(adapter.convert(painted, 'js/road-paint.js#buildRoadPaint').vertexColors, true);
   const unsafe = source.clone(); unsafe.map = new THREE.Texture(); unsafe.map.userData.sourceRef = 'https://example.com/a.png?token=private';
   assert.throws(() => adapter.convert(unsafe, 'js/fixture.js#unsafe'), /Unsafe texture URL/);
-  dispose([...owned, source, unsafe, unsafe.map]);
+  dispose([...owned, source, painted, unsafe, unsafe.map]);
 });
 
 test('deferred overview and detail deliver different source geometries without changing actor identity', async () => {

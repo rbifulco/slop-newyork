@@ -6,7 +6,7 @@ On 22 October 2026 the repository owner requested installation, explicitly appro
 
 The official editor may embed the dedicated capture and receive explicitly registered scene, asset, material, texture, navigation and source-reference data. Authorization remains in `spatial-review/capture.mjs`: `allowOfficialEditor: true`, no additional production origins, loopback peers enabled only on a loopback producer. Same-origin requests remain implicitly allowed. Ordinary DOM, cookies and storage are not registered. Texture URLs containing credentials or query strings are rejected by the world material adapter.
 
-The capture uses SDK 0.8.0 and Three.js 0.186.1. The 0.8.0 protocol upgrade updates the SDK and lockfile while preserving the existing capture adapters, capture HTML/discovery, and tests. Ordinary `index.html`, all `js/` sources and the game's render loop remain unchanged from `bcf4bc4`.
+The capture uses SDK 0.9.0 and Three.js 0.186.1. The 0.9.0 update preserves capture IDs, HTML/discovery and approved origins, and retains visible color attributes, UVs and supported maps in both export profiles. Ordinary `index.html`, all `js/` sources and the game's render loop remain unchanged from `bcf4bc4`.
 
 ## Review representation and authoritative sources
 
@@ -56,13 +56,13 @@ GPU-only steam, god rays, glare/beam sprites and contact-shadow planes are exclu
 
 Geometry delivery uses deferred `asset-stream-v1` representations. The compatibility target is the current official editor supporting that capability; legacy consumers do not receive deferred-only geometry. Consumers without assembly support use the SDK's flattened ownership fallback.
 
-Overview and detail are distinct where source tree LODs exist. Other systems retain the same geometry in both families. The scene serialization profile intentionally omits surface texture evidence; Asset/review profile carries supported normals, UVs and maps. Large geometry is split along complete triangles while preserving material groups. Repeated instances stay instanced, not individually expanded into vertices.
+Overview and detail are distinct where source tree LODs exist. Other systems retain the same geometry in both families. The 0.9 scene serialization profile carries vertex colors, UVs and supported maps; Asset/review additionally carries supplied normals. Source vertexColors opt-in is preserved. Road-marking RGB is visible paint color; paint/side and crowd skin/extra inputs remain shader data, never indiscriminately enabled as RGB. Large geometry is split along complete triangles while preserving material groups. Repeated instances stay instanced, not individually expanded into vertices.
 
-Per-response geometry limit: 16 MiB. Texture limit: 4 MiB. Two concurrent asset requests, 32 MiB aggregate in flight, 64 queued requests. Region packing targets approximately 6 MiB plus metadata. Producers check cancellation and budget before serialization. SDK resource/snapshot caches and deferred-texture delivery grace remain authoritative; regenerate a representation to obtain current resource IDs after eviction. No unbounded representation cache is added.
+Per-response geometry limit: 16 MiB. Texture limit: 4 MiB. Two concurrent asset requests, 32 MiB aggregate in flight, 64 queued requests. Region packing retains its established position/normal/UV partition weights to preserve actor and component identities. The advertised estimates include every exported RGB/RGBA byte; color-heavy packets can exceed the old 6 MiB packing target while remaining below the unchanged 16 MiB response ceiling. Producers check cancellation and budget before serialization. SDK resource/snapshot caches and deferred-texture delivery grace remain authoritative; regenerate a representation to obtain current resource IDs after eviction. No unbounded representation cache is added.
 
 Construction is not lazy and is not yet uniformly divided into sub-50 ms work. Source geography, building and tree constructors can block the capture document for hundreds of milliseconds or longer. Capture yields between systems and during block-detail, partition and pedestrian work. It does not add any of that work to the ordinary page. This is a substantial desktop-oriented scene, not a mobile performance qualification. Loading all detail has a large memory and transfer cost.
 
-Cancellation, failure, page hide and refresh detach the bridge before unregistering. Capture-owned instances, geometry, materials and textures are disposed; the live game owns none of them. Back/forward-cache restoration starts a new complete registry. Bootstrap progress is shown in the capture HTML; SDK 0.8.0 does not provide a producer-controlled initial readiness gate.
+Cancellation, failure, page hide and refresh detach the bridge before unregistering. Capture-owned instances, geometry, materials and textures are disposed; the live game owns none of them. Back/forward-cache restoration starts a new complete registry. Bootstrap progress is shown in the capture HTML; SDK 0.9.0 does not provide a producer-controlled initial readiness gate.
 
 ## Transport and deployment
 
@@ -97,3 +97,60 @@ Local evidence before commit:
 `npm run test:browser` now requests both detail and overview geometry from every world system, decodes a generated texture, reloads the capture, compares the complete actor catalog and checks zero retained registry/cache ownership after disposal. CI job results are the source of truth for those normal browser checks.
 
 The expanded scene's official-editor visual acceptance, real-device mobile performance, pixel parity with the game and a new editor feedback/source-edit round trip remain unverified unless separately recorded. The previous landmark-only editor acceptance does not prove these expanded checks. Preserve all existing user feedback; no disposable editor operation was applied in this expansion.
+
+
+## SDK 0.9.0 update — 24 October 2026
+
+The owner requested this appearance update and publication through the existing
+`Publish Slop New York Spatial Review` workflow on `feat/spatial-review`.
+Npm and its committed lockfile pin SDK and transitive protocol 0.9.0; Three.js
+remains 0.186.1. No validator or CLI package is directly declared. Existing
+source-derived build IDs include the lockfile, so the new capture identity is
+`slop-newyork-415aa8b36e7a9843e7c4`; deferred revisions include that identity.
+There are no prepared review packages or static geometry exports to migrate.
+
+The world and landmark material adapters preserve source vertexColors flags.
+Geometry splitting retains normalized RGB/RGBA through accessors, and deferred
+estimates include float color storage (12 bytes/RGB vertex, 16/RGBA). Road paint
+keeps its actual white/yellow colors with a neutral white base; existing material
+names remain unchanged for feedback identity. Procedural dashed coverage,
+wetness, wear, anti-alias widening, water and facade TSL, lighting and post
+processing remain capture-only approximations. Custom paint/side, skin/extra,
+and tree atlas coverage inputs are not interpreted as visible RGB.
+
+### Verification and resource costs
+
+- Before and after: all 124 existing tests and the production build passed.
+  Eight focused geometry/material tests also passed after the final identity
+  preservation change, including normalized RGBA splitting and source opt-in.
+- The existing real cross-origin browser smoke passed before and after. The
+  complete catalog remains exactly 761 actors with identical IDs, transforms,
+  bounds and source mappings, ten assemblies and eight navigation sequences.
+  Refresh preserved that catalog; teardown left zero registry/cache owners.
+- Aggregate authored navigation contains 16 stops, eight segments, and 549
+  camera/aim sample occurrences across all serialized sequences. This is below
+  the current editor's 50,000-point ceiling. The 761 asset families and actors
+  are below its respective 2,000/5,000 catalog limits.
+- Grand Central / MetLife (`landmark-design-gct`) retains UVs and its generated
+  sign map in Scene and Asset, with identical material IDs and the same texture
+  resource. Scene geometry uses 46,856 bytes; Asset geometry uses 70,808 bytes.
+  The 512×128 PNG transfers 3,657 bytes and decodes to 262,144 RGBA8 bytes.
+  An RGBA8 full-mipmap GPU allocation would use about 349,526 bytes; this is a
+  format estimate, not measured driver memory. Count this resource once per
+  shared design, not once per placement or export profile.
+- The representative road-marking region (`world-markings-0--1-0-design`) has
+  three unique geometries, 2,929,392 Scene geometry bytes and 4,394,088 Asset
+  geometry bytes, including 1,464,696 visible RGB bytes. It has no map cost.
+- The largest descriptor estimate is 9,557,248 bytes for
+  `world-geography-0--1-7-design`, below the unchanged 16 MiB response limit.
+  Estimates include shared geometry once within each representation. These
+  representative costs are not a whole-city memory or initial-download claim.
+- The normal website source, controls, rendering, scripts and HTML are unchanged.
+  The performance screen is not triggered: static discovery keeps every changed
+  capture adapter, SDK import and serializer off the ordinary page.
+
+The local bridge tests establish appearance data delivery, map decoding,
+stable identities and resource sharing. They do not establish interactive
+acceptance in the official editor. The published editor still needs the
+representative Scene/Asset/Experience check; its outcome is separate from
+producer and workflow checks. Existing user feedback was not changed.
