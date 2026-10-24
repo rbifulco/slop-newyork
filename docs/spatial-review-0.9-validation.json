@@ -129,7 +129,1266 @@
     "crossOriginBrowser": "pass",
     "stableRefresh": "pass",
     "teardown": "pass",
-    "officialEditor": "not established by producer smoke"
+    "officialEditor": "partial: Asset geometry/textures ready and initial subject visible; clean deselected Asset appearance and focused Scene appearance not fully verified"
   },
-  "errors": []
+  "errors": [],
+  "geometryBytesBasis": "Actual negotiated typed-buffer byteLength for unique positions, normals, UVs, colors and indices; excludes node/material metadata, instance matrices and texture resources. The 9557248-byte largest descriptor is a separate conservative estimate.",
+  "textureBytesBasis": "Encoded PNG bytes measured separately from decoded width*height*4 RGBA8 image storage. Full mip-chain GPU figures are approximate RGBA8 format estimates, not driver measurements.",
+  "identityChecks": {
+    "baselineSdk": "0.8.0",
+    "sdk": "0.9.0",
+    "subjects": 11,
+    "profiles": 2,
+    "rows": [
+      {
+        "assetId": "landmark-design-esb",
+        "profile": "scene",
+        "nodes": 34,
+        "materials": 6,
+        "geometries": 32,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-esb",
+        "profile": "review",
+        "nodes": 34,
+        "materials": 6,
+        "geometries": 32,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-chrysler",
+        "profile": "scene",
+        "nodes": 33,
+        "materials": 4,
+        "geometries": 31,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-chrysler",
+        "profile": "review",
+        "nodes": 33,
+        "materials": 4,
+        "geometries": 31,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-vanderbilt",
+        "profile": "scene",
+        "nodes": 27,
+        "materials": 3,
+        "geometries": 25,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-vanderbilt",
+        "profile": "review",
+        "nodes": 27,
+        "materials": 3,
+        "geometries": 25,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-gct",
+        "profile": "scene",
+        "nodes": 50,
+        "materials": 7,
+        "geometries": 48,
+        "idsStable": true,
+        "ids": {
+          "nodes": [
+            {
+              "id": "landmark-design-gct-root",
+              "materialIds": [],
+              "sourceRef": "js/landmarks.js#name: 'gct'"
+            },
+            {
+              "id": "landmark-design-gct-gct-1",
+              "parentId": "landmark-design-gct-root",
+              "materialIds": [],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-1"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctbody-1-1",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-1",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkmarblestonemat-1"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctbody-1-1"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctroof-1-2",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-2",
+              "materialIds": [
+                "landmark-design-gct-material-copperroofmat-2"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctroof-1-2"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-17-1-3",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-3",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-17-1-3"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-17-1-4",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-4",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-17-1-4"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-5",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-5",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-5"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-0-1-6",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-6",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-0-1-6"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-7",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-7",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-7"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-8-5-1-8",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-8",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-8-5-1-8"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-13-1-9",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-9",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-13-1-9"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-17-5-1-10",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-10",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-17-5-1-10"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-0-1-11",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-11",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-0-1-11"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-0-1-12",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-12",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-0-1-12"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-2-3-1-13",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-13",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-2-3-1-13"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-0-1-14",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-14",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-0-1-14"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-2-3-1-15",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-15",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-2-3-1-15"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-8-5-1-16",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-16",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-8-5-1-16"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-13-1-17",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-17",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-13-1-17"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-17-5-1-18",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-18",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-17-5-1-18"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-17-1-19",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-19",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-17-1-19"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-17-1-20",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-20",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-17-1-20"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-21",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-21",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-21"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-0-1-22",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-22",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-0-1-22"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-23",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-23",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-23"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-8-5-1-24",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-24",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-8-5-1-24"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-13-1-25",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-25",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-13-1-25"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-17-5-1-26",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-26",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-17-5-1-26"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-25-5-1-27",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-27",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-25-5-1-27"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-23-1-28",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-28",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-23-1-28"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-9-8-1-29",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-29",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-9-8-1-29"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-7-2-1-30",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-30",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-7-2-1-30"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-7-2-1-31",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-31",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-7-2-1-31"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-9-8-1-32",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-32",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-9-8-1-32"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-23-1-33",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-33",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-23-1-33"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-25-5-1-34",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-34",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-25-5-1-34"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctentablature-1-35",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-35",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctentablature-1-35"
+            },
+            {
+              "id": "landmark-design-gct-gct-pediment-1-36",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-36",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pediment-1-36"
+            },
+            {
+              "id": "landmark-design-gct-gct-pedimentpeak-1-37",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-37",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pedimentpeak-1-37"
+            },
+            {
+              "id": "landmark-design-gct-gct-clockbezel-1-38",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-38",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-clockbezel-1-38"
+            },
+            {
+              "id": "landmark-design-gct-gct-clockglow-1-39",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-39",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-clockglow-1-39"
+            },
+            {
+              "id": "landmark-design-gct-gct-viaductdeck-1-40",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-40",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-viaductdeck-1-40"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-8-1-41",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-41",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-8-1-41"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-28-1-42",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-42",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-28-1-42"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-52-1-43",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-43",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-52-1-43"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-70-1-44",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-44",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-70-1-44"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlcenter-1-45",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-45",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlcenter-1-45"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlwingw-1-46",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-46",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlwingw-1-46"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlwinge-1-47",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-47",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlwinge-1-47"
+            },
+            {
+              "id": "landmark-design-gct-gct-signband-1-48",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-48",
+              "materialIds": [
+                "landmark-design-gct-material-metlifesignmat-7"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-signband-1-48"
+            }
+          ],
+          "materials": [
+            "landmark-design-gct-material-landmarkmarblestonemat-1",
+            "landmark-design-gct-material-copperroofmat-2",
+            "landmark-design-gct-material-warmfloodmat-3",
+            "landmark-design-gct-material-darkbronzeframemat-4",
+            "landmark-design-gct-material-limestonetrimmat-5",
+            "landmark-design-gct-material-landmarkbronzecurtainmat-6",
+            "landmark-design-gct-material-metlifesignmat-7"
+          ],
+          "geometries": [
+            "landmark-design-gct-geometry-boxgeometry-1",
+            "landmark-design-gct-geometry-boxgeometry-2",
+            "landmark-design-gct-geometry-boxgeometry-3",
+            "landmark-design-gct-geometry-cylindergeometry-4",
+            "landmark-design-gct-geometry-boxgeometry-5",
+            "landmark-design-gct-geometry-boxgeometry-6",
+            "landmark-design-gct-geometry-boxgeometry-7",
+            "landmark-design-gct-geometry-boxgeometry-8",
+            "landmark-design-gct-geometry-boxgeometry-9",
+            "landmark-design-gct-geometry-boxgeometry-10",
+            "landmark-design-gct-geometry-boxgeometry-11",
+            "landmark-design-gct-geometry-cylindergeometry-12",
+            "landmark-design-gct-geometry-boxgeometry-13",
+            "landmark-design-gct-geometry-boxgeometry-14",
+            "landmark-design-gct-geometry-boxgeometry-15",
+            "landmark-design-gct-geometry-boxgeometry-16",
+            "landmark-design-gct-geometry-boxgeometry-17",
+            "landmark-design-gct-geometry-boxgeometry-18",
+            "landmark-design-gct-geometry-boxgeometry-19",
+            "landmark-design-gct-geometry-cylindergeometry-20",
+            "landmark-design-gct-geometry-boxgeometry-21",
+            "landmark-design-gct-geometry-boxgeometry-22",
+            "landmark-design-gct-geometry-boxgeometry-23",
+            "landmark-design-gct-geometry-boxgeometry-24",
+            "landmark-design-gct-geometry-boxgeometry-25",
+            "landmark-design-gct-geometry-boxgeometry-26",
+            "landmark-design-gct-geometry-cylindergeometry-27",
+            "landmark-design-gct-geometry-cylindergeometry-28",
+            "landmark-design-gct-geometry-cylindergeometry-29",
+            "landmark-design-gct-geometry-cylindergeometry-30",
+            "landmark-design-gct-geometry-cylindergeometry-31",
+            "landmark-design-gct-geometry-cylindergeometry-32",
+            "landmark-design-gct-geometry-cylindergeometry-33",
+            "landmark-design-gct-geometry-cylindergeometry-34",
+            "landmark-design-gct-geometry-boxgeometry-35",
+            "landmark-design-gct-geometry-boxgeometry-36",
+            "landmark-design-gct-geometry-boxgeometry-37",
+            "landmark-design-gct-geometry-cylindergeometry-38",
+            "landmark-design-gct-geometry-cylindergeometry-39",
+            "landmark-design-gct-geometry-boxgeometry-40",
+            "landmark-design-gct-geometry-boxgeometry-41",
+            "landmark-design-gct-geometry-boxgeometry-42",
+            "landmark-design-gct-geometry-boxgeometry-43",
+            "landmark-design-gct-geometry-boxgeometry-44",
+            "landmark-design-gct-geometry-boxgeometry-45",
+            "landmark-design-gct-geometry-boxgeometry-46",
+            "landmark-design-gct-geometry-boxgeometry-47",
+            "landmark-design-gct-geometry-boxgeometry-48"
+          ]
+        }
+      },
+      {
+        "assetId": "landmark-design-gct",
+        "profile": "review",
+        "nodes": 50,
+        "materials": 7,
+        "geometries": 48,
+        "idsStable": true,
+        "ids": {
+          "nodes": [
+            {
+              "id": "landmark-design-gct-root",
+              "materialIds": [],
+              "sourceRef": "js/landmarks.js#name: 'gct'"
+            },
+            {
+              "id": "landmark-design-gct-gct-1",
+              "parentId": "landmark-design-gct-root",
+              "materialIds": [],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-1"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctbody-1-1",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-1",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkmarblestonemat-1"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctbody-1-1"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctroof-1-2",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-2",
+              "materialIds": [
+                "landmark-design-gct-material-copperroofmat-2"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctroof-1-2"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-17-1-3",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-3",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-17-1-3"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-17-1-4",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-4",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-17-1-4"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-5",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-5",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-5"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-0-1-6",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-6",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-0-1-6"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-7",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-7",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-7"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-8-5-1-8",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-8",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-8-5-1-8"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-13-1-9",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-9",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-13-1-9"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-17-5-1-10",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-10",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-17-5-1-10"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-0-1-11",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-11",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-0-1-11"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-0-1-12",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-12",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-0-1-12"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-2-3-1-13",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-13",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-2-3-1-13"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-0-1-14",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-14",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-0-1-14"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-0-2-3-1-15",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-15",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-0-2-3-1-15"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-8-5-1-16",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-16",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-8-5-1-16"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-13-1-17",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-17",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-13-1-17"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-0-17-5-1-18",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-18",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-0-17-5-1-18"
+            },
+            {
+              "id": "landmark-design-gct-gct-archwin-17-1-19",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-19",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archwin-17-1-19"
+            },
+            {
+              "id": "landmark-design-gct-gct-archtop-17-1-20",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-20",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-archtop-17-1-20"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-21",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-21",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-21"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-0-1-22",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-22",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-0-1-22"
+            },
+            {
+              "id": "landmark-design-gct-gct-vbar-17-2-3-1-23",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-23",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-vbar-17-2-3-1-23"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-8-5-1-24",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-24",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-8-5-1-24"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-13-1-25",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-25",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-13-1-25"
+            },
+            {
+              "id": "landmark-design-gct-gct-hbar-17-17-5-1-26",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-26",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-hbar-17-17-5-1-26"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-25-5-1-27",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-27",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-25-5-1-27"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-23-1-28",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-28",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-23-1-28"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-9-8-1-29",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-29",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-9-8-1-29"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-7-2-1-30",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-30",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-7-2-1-30"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-7-2-1-31",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-31",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-7-2-1-31"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-9-8-1-32",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-32",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-9-8-1-32"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-23-1-33",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-33",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-23-1-33"
+            },
+            {
+              "id": "landmark-design-gct-gct-col-25-5-1-34",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-34",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-col-25-5-1-34"
+            },
+            {
+              "id": "landmark-design-gct-gct-gctentablature-1-35",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-35",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-gctentablature-1-35"
+            },
+            {
+              "id": "landmark-design-gct-gct-pediment-1-36",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-36",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pediment-1-36"
+            },
+            {
+              "id": "landmark-design-gct-gct-pedimentpeak-1-37",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-37",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pedimentpeak-1-37"
+            },
+            {
+              "id": "landmark-design-gct-gct-clockbezel-1-38",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-38",
+              "materialIds": [
+                "landmark-design-gct-material-darkbronzeframemat-4"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-clockbezel-1-38"
+            },
+            {
+              "id": "landmark-design-gct-gct-clockglow-1-39",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-cylindergeometry-39",
+              "materialIds": [
+                "landmark-design-gct-material-warmfloodmat-3"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-clockglow-1-39"
+            },
+            {
+              "id": "landmark-design-gct-gct-viaductdeck-1-40",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-40",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-viaductdeck-1-40"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-8-1-41",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-41",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-8-1-41"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-28-1-42",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-42",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-28-1-42"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-52-1-43",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-43",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-52-1-43"
+            },
+            {
+              "id": "landmark-design-gct-gct-pier-70-1-44",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-44",
+              "materialIds": [
+                "landmark-design-gct-material-limestonetrimmat-5"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-pier-70-1-44"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlcenter-1-45",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-45",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlcenter-1-45"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlwingw-1-46",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-46",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlwingw-1-46"
+            },
+            {
+              "id": "landmark-design-gct-gct-mlwinge-1-47",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-47",
+              "materialIds": [
+                "landmark-design-gct-material-landmarkbronzecurtainmat-6"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-mlwinge-1-47"
+            },
+            {
+              "id": "landmark-design-gct-gct-signband-1-48",
+              "parentId": "landmark-design-gct-gct-1",
+              "geometryId": "landmark-design-gct-geometry-boxgeometry-48",
+              "materialIds": [
+                "landmark-design-gct-material-metlifesignmat-7"
+              ],
+              "sourceRef": "js/landmarks.js#name: 'gct'#landmark-design-gct-gct-signband-1-48"
+            }
+          ],
+          "materials": [
+            "landmark-design-gct-material-landmarkmarblestonemat-1",
+            "landmark-design-gct-material-copperroofmat-2",
+            "landmark-design-gct-material-warmfloodmat-3",
+            "landmark-design-gct-material-darkbronzeframemat-4",
+            "landmark-design-gct-material-limestonetrimmat-5",
+            "landmark-design-gct-material-landmarkbronzecurtainmat-6",
+            "landmark-design-gct-material-metlifesignmat-7"
+          ],
+          "geometries": [
+            "landmark-design-gct-geometry-boxgeometry-1",
+            "landmark-design-gct-geometry-boxgeometry-2",
+            "landmark-design-gct-geometry-boxgeometry-3",
+            "landmark-design-gct-geometry-cylindergeometry-4",
+            "landmark-design-gct-geometry-boxgeometry-5",
+            "landmark-design-gct-geometry-boxgeometry-6",
+            "landmark-design-gct-geometry-boxgeometry-7",
+            "landmark-design-gct-geometry-boxgeometry-8",
+            "landmark-design-gct-geometry-boxgeometry-9",
+            "landmark-design-gct-geometry-boxgeometry-10",
+            "landmark-design-gct-geometry-boxgeometry-11",
+            "landmark-design-gct-geometry-cylindergeometry-12",
+            "landmark-design-gct-geometry-boxgeometry-13",
+            "landmark-design-gct-geometry-boxgeometry-14",
+            "landmark-design-gct-geometry-boxgeometry-15",
+            "landmark-design-gct-geometry-boxgeometry-16",
+            "landmark-design-gct-geometry-boxgeometry-17",
+            "landmark-design-gct-geometry-boxgeometry-18",
+            "landmark-design-gct-geometry-boxgeometry-19",
+            "landmark-design-gct-geometry-cylindergeometry-20",
+            "landmark-design-gct-geometry-boxgeometry-21",
+            "landmark-design-gct-geometry-boxgeometry-22",
+            "landmark-design-gct-geometry-boxgeometry-23",
+            "landmark-design-gct-geometry-boxgeometry-24",
+            "landmark-design-gct-geometry-boxgeometry-25",
+            "landmark-design-gct-geometry-boxgeometry-26",
+            "landmark-design-gct-geometry-cylindergeometry-27",
+            "landmark-design-gct-geometry-cylindergeometry-28",
+            "landmark-design-gct-geometry-cylindergeometry-29",
+            "landmark-design-gct-geometry-cylindergeometry-30",
+            "landmark-design-gct-geometry-cylindergeometry-31",
+            "landmark-design-gct-geometry-cylindergeometry-32",
+            "landmark-design-gct-geometry-cylindergeometry-33",
+            "landmark-design-gct-geometry-cylindergeometry-34",
+            "landmark-design-gct-geometry-boxgeometry-35",
+            "landmark-design-gct-geometry-boxgeometry-36",
+            "landmark-design-gct-geometry-boxgeometry-37",
+            "landmark-design-gct-geometry-cylindergeometry-38",
+            "landmark-design-gct-geometry-cylindergeometry-39",
+            "landmark-design-gct-geometry-boxgeometry-40",
+            "landmark-design-gct-geometry-boxgeometry-41",
+            "landmark-design-gct-geometry-boxgeometry-42",
+            "landmark-design-gct-geometry-boxgeometry-43",
+            "landmark-design-gct-geometry-boxgeometry-44",
+            "landmark-design-gct-geometry-boxgeometry-45",
+            "landmark-design-gct-geometry-boxgeometry-46",
+            "landmark-design-gct-geometry-boxgeometry-47",
+            "landmark-design-gct-geometry-boxgeometry-48"
+          ]
+        }
+      },
+      {
+        "assetId": "landmark-design-bryant",
+        "profile": "scene",
+        "nodes": 30,
+        "materials": 8,
+        "geometries": 28,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-bryant",
+        "profile": "review",
+        "nodes": 30,
+        "materials": 8,
+        "geometries": 28,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-timessquare",
+        "profile": "scene",
+        "nodes": 20,
+        "materials": 9,
+        "geometries": 18,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-timessquare",
+        "profile": "review",
+        "nodes": 20,
+        "materials": 9,
+        "geometries": 18,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-rockefeller",
+        "profile": "scene",
+        "nodes": 7,
+        "materials": 2,
+        "geometries": 5,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-rockefeller",
+        "profile": "review",
+        "nodes": 7,
+        "materials": 2,
+        "geometries": 5,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-citigroup",
+        "profile": "scene",
+        "nodes": 9,
+        "materials": 2,
+        "geometries": 7,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-citigroup",
+        "profile": "review",
+        "nodes": 9,
+        "materials": 2,
+        "geometries": 7,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-flatiron",
+        "profile": "scene",
+        "nodes": 4,
+        "materials": 2,
+        "geometries": 2,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-flatiron",
+        "profile": "review",
+        "nodes": 4,
+        "materials": 2,
+        "geometries": 2,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-seagram",
+        "profile": "scene",
+        "nodes": 6,
+        "materials": 2,
+        "geometries": 4,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-seagram",
+        "profile": "review",
+        "nodes": 6,
+        "materials": 2,
+        "geometries": 4,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-owtc",
+        "profile": "scene",
+        "nodes": 29,
+        "materials": 3,
+        "geometries": 27,
+        "idsStable": true
+      },
+      {
+        "assetId": "landmark-design-owtc",
+        "profile": "review",
+        "nodes": 29,
+        "materials": 3,
+        "geometries": 27,
+        "idsStable": true
+      }
+    ]
+  },
+  "publication": {
+    "sourceCommit": "3cafeea851587358edf709e1f4d7cda324741b25",
+    "sourceBranch": "feat/spatial-review",
+    "url": "https://rbifulco.github.io/slop-newyork/",
+    "workflow": {
+      "url": "https://github.com/rbifulco/slop-newyork/actions/runs/40123230204",
+      "conclusion": "success",
+      "attempt": 2
+    },
+    "publicDiscovery": {
+      "status": 200,
+      "bytes": 401
+    },
+    "publicCaptureBundle": {
+      "status": 200,
+      "bytes": 3171878,
+      "sha256": "a9204fd159117af99b1162ed08c9d40f0d26338e319f1878797b5cf6520f2783",
+      "exactBuiltMatch": true
+    },
+    "publicIndex": {
+      "status": 200,
+      "bytes": 23225,
+      "exactUnmodifiedSourceMatch": true
+    },
+    "publicBuildId": "slop-newyork-415aa8b36e7a9843e7c4",
+    "hostingConfigurationChanged": false
+  },
+  "officialEditor": {
+    "assetUrl": "https://spatial-review.alterno.dev/at/rbifulco.github.io/slop-newyork/?view=asset&asset=landmark-design-gct",
+    "sceneUrl": "https://spatial-review.alterno.dev/at/rbifulco.github.io/slop-newyork/?view=scene",
+    "buildId": "slop-newyork-415aa8b36e7a9843e7c4",
+    "catalogAccepted": {
+      "actors": 761,
+      "assets": 761
+    },
+    "asset": {
+      "assetId": "landmark-design-gct",
+      "geometry": "ready",
+      "textureSlotsReady": 1,
+      "textureSlotsTotal": 1,
+      "nodes": 50,
+      "materials": 7,
+      "triangles": 1156,
+      "vertices": 1996,
+      "initialVisual": "Grand Central/MetLife geometry and its sign were visibly rendered in the initial Asset screenshot",
+      "deselectedVisual": "incomplete: the final screenshot after deselection captured an empty grid despite ready geometry/texture status; cause not established"
+    },
+    "scene": {
+      "status": "incomplete",
+      "objects": 761,
+      "pathReferences": 8,
+      "actorMeshesReadyAtSnapshot": 571,
+      "subjectSelectedInEarlierAttempt": true,
+      "focusedSubjectVerified": false,
+      "limitation": "Grand Central was selected in an earlier Scene attempt, but native double-click framing timed out. A bounded follow-up could not reach its row in the virtualized tree. No focused Scene appearance pass is claimed."
+    },
+    "experience": "Eight authored sequences verified through the bridge; interactive view not verified in this session",
+    "pageErrors": [],
+    "protocolFailures": [],
+    "scope": "Read-only. No feedback notes, transform/visibility proposals or source-edit round trip were created. Hardware-browser performance and full-city appearance are not qualified."
+  }
 }

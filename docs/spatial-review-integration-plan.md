@@ -149,8 +149,52 @@ and tree atlas coverage inputs are not interpreted as visible RGB.
   The performance screen is not triggered: static discovery keeps every changed
   capture adapter, SDK import and serializer off the ordinary page.
 
-The local bridge tests establish appearance data delivery, map decoding,
-stable identities and resource sharing. They do not establish interactive
-acceptance in the official editor. The published editor still needs the
-representative Scene/Asset/Experience check; its outcome is separate from
-producer and workflow checks. Existing user feedback was not changed.
+Geometry byte counts above sum the actual negotiated typed buffers, including
+actual index-buffer widths, once per unique geometry. They exclude node/material
+metadata, instance matrices and the separately reported texture resources.
+The largest descriptor remains a conservative estimate, not an actual transfer.
+
+A separate old/new comparison ran the original adapter with SDK 0.8.0 and the
+updated adapter with SDK 0.9.0 against the same authoritative source builders.
+All eleven landmarks retain exactly the same node IDs, parent links, source
+references, material IDs and geometry IDs in both profiles: 498 node records and
+96 material records across the two profiles. Grand Central retains 50 nodes,
+7 materials and 48 geometries per profile. These identity checks are recorded in
+`docs/spatial-review-0.9-validation.json`.
+
+### Published acceptance
+
+The update was published from commit
+[`3cafeea`](https://github.com/rbifulco/slop-newyork/commit/3cafeea851587358edf709e1f4d7cda324741b25)
+through the existing [Publish Slop New York Spatial Review workflow](https://github.com/rbifulco/slop-newyork/actions/runs/40123230204).
+The complete build/test job passed. The deployment verification initially saw
+HTTP 404 responses during publication; rerunning the deployment after propagation
+passed (attempt 2). Hosting configuration was preserved.
+
+The public discovery manifest returned HTTP 200 (401 bytes), the capture bundle
+matches the built 3,171,878-byte file exactly, and the published build is
+`slop-newyork-415aa8b36e7a9843e7c4`. The ordinary 23,225-byte `index.html` matches
+the unchanged source exactly. The dependency tree reports SDK and protocol 0.9.0.
+
+The current [official Asset view](https://spatial-review.alterno.dev/at/rbifulco.github.io/slop-newyork/?view=asset&asset=landmark-design-gct)
+accepted the final catalog of 761 actors and 761 asset families. Grand Central /
+MetLife reached **Geometry ready** and **1/1 textures ready**, reporting 50 nodes,
+7 materials, 1,156 triangles and 1,996 vertices. An initial screenshot visibly
+rendered the buildings and MetLife sign. A later screenshot after clearing the
+part selection captured an empty grid despite the ready status; its cause was
+not established. A clean deselected appearance check is therefore incomplete.
+
+The Scene view opened with all 761 objects, eight path references and 571 actor
+meshes ready. Grand Central's row was selected in an earlier attempt, but native
+double-click framing timed out under software rendering. A bounded follow-up
+could not reach its row in the virtualized tree. Focused Scene appearance and
+interactive Experience inspection remain incomplete; they are not presented as
+passing visual checks. Independent real bridge tests did verify Scene-profile
+colors, UVs, map decoding, stable identities and shared resources.
+
+These checks used headless Chromium with SwiftShader, including a disposable
+render-throttle/low-DPR test setup to reduce host load. They do not qualify
+hardware-browser performance, the complete city appearance or parity with the
+ordinary game's shader and lighting. No feedback notes, visibility/transform
+proposals or disposable source edits were created; existing user feedback was
+not changed.
